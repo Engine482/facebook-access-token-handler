@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook Access Token Handler</title>
+    <script>
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+
+      window.onload = function () {
+        var accessToken = getParameterByName('access_token');
+        if (accessToken) {
+          // Handle the access token here, for example, display it in the page or store it
+          document.getElementById('access-token').innerText = accessToken;
+        } else {
+          document.getElementById('error').innerText = 'Access token not found.';
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Facebook Access Token</h1>
+    <p id="access-token"></p>
+    <p id="error"></p>
+  </body>
+</html>
